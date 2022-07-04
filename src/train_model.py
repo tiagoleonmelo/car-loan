@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from joblib import dump
 
-from commons import DATA_SOURCE, DB_NAME, MODEL_PATH, SCHEMA_NAME, TARGET
+from commons import DATA_SOURCE, DB_NAME, FEATURES, MODEL_PATH, SCHEMA_NAME, TARGET
 from Loader import Loader
 
 logging.basicConfig(level=logging.INFO)
@@ -34,7 +34,9 @@ def main():
     labels = df.pop(TARGET)
 
     # Split dataset into training set and test set
-    X_train, X_test, y_train, y_test = train_test_split(df, labels, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(
+        df[FEATURES], labels, test_size=0.3
+    )
 
     end = time.time()
     elapsed = end - start
