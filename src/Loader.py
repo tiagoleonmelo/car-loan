@@ -13,7 +13,8 @@ class Loader:
     Attributes:
         data_source : pd.DataFrame
             Data source represented as a pandas dataframe
-        database_name : Name of the database to use when interacting with the DB engine
+        engine : sqlalchemy.Engine
+            Database engine
 
     Methods:
         populate_db(schema_name="loan", table_name="car_loan")
@@ -36,7 +37,7 @@ class Loader:
         Parameters
             table_name : bool, optional
                 Name of the new table
-            schema_name : str
+            schema_name : str, optional
                 Name of the schema to use
 
         Returns
@@ -44,7 +45,11 @@ class Loader:
         """
         try:
             self.data_source.to_sql(
-                table_name, self.engine, schema=schema_name, if_exists="replace"
+                table_name,
+                self.engine,
+                schema=schema_name,
+                index=False,
+                if_exists="replace",
             )
 
         except ValueError:

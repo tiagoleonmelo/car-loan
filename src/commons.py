@@ -4,6 +4,7 @@ DATA_SOURCE = os.path.abspath("../data/car_loan_trainset_clean.csv")
 DB_NAME = "cars"
 SCHEMA_NAME = "loans"
 TABLE_NAME = "car_loan"
+API_TABLE_NAME = "api_predictions"
 TARGET = "loan_default"
 
 MODEL_PATH = os.path.abspath("../models/classifier.pkl")

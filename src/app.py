@@ -15,7 +15,19 @@ USERS = {"tleonmelo": generate_password_hash("dragon")}
 
 
 @auth.verify_password
-def verify_password(username, password):
+def verify_password(username: str, password: str):
+    """Utility function to verify whether username matches saved password to authenticate
+    users.
+
+    Parameters
+        username: str
+            Name of the user trying to authenticate themselves
+        password: str
+            Password of the user in plaintext
+
+    Returns
+        boolean : whether the username/password combination is valid
+    """
     if username in USERS:
         return check_password_hash(USERS.get(username), password)
     return False
@@ -59,7 +71,7 @@ def make_predictions():
 @app.route("/api/secure_predict", methods=["POST"])
 @auth.login_required
 def make_auth_predictions():
-    """Same as above, but supporting basic authentication."""
+    """Same as above, but supporting basic authentication"""
 
     error = "Invalid HTTP request"
 
